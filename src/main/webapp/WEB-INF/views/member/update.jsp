@@ -33,7 +33,7 @@
 %>
 <c:set var="memberDTO" value="${ requestScope.memberDTO}" ></c:set>
 <c:if test="${!empty memberDTO }">
-<form action="updatePro.me" method="post">
+<form action="${pageContext.request.contextPath}/member/updatePro" method="post">
 아이디 : <input type="text" name="id" value="${memberDTO.id }" readonly><br>
 비밀번호 : <input type="password" name="pw"> 비밀번호 입력 시 회원정보 수정<br>
 이름 : <input type="text" name="name" value="${memberDTO.name }"><br>
