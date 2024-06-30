@@ -4,5 +4,39 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<!-- MemberController 객체 생성 -->
+	<bean id="memberController" class="com.mystroy001.controller.MemberController">
+<!-- 	<constructor-arg name="memberService" ref="memberService"></constructor-arg> -->
+		<property name="memberService" ref="memberService"></property>
+	</bean>
+
+	<!-- 
+	MemberService 객체 생성 
+	MemberService memberService = new MemberSerivce();
+	<bean id="변수명" class="경로>
+	-->
+	<bean id="memberService" class="com.mystroy001.service.MemberService">
+		<property name="memberDAO" ref="memberDAO"></property>
+	</bean>
+	<!-- 외부에서 자바단으로 전달 set 메소드, 생성자를 통해 memberService에서 MemberController에 값을 전달할 수 있음 -->
+	
+	<!-- MemberDAO 객체 생성 -->
+	<bean id="memberDAO" class="com.mystroy001.dao.MemberDAO">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<!-- 
+	데이터베이스 연결 객체 생성 
+	프로그램 설치(mysql, spring jdbc) → 자동으로 프로그램 설치 Maven 의존 → Maven 서버에 프로그램이 저장되어 있고 다운받고자 하는 프로그램 이름을 pom.xml 작성하면 다운받아 사용
+	→ https://mvnrepository.com/ 접속 후 mysql 검색 → 중간에 Maven 코드 복사 → pom.xml에 코드 붙여 넣기
+	→ Spring JDBC 검색 → 버전 수정 <version>${org.springframework-version}</version>
+	-->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/jspdb1?serverTimezone=Asia/Seoul"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="1234"></property>	
+	</bean>
 		
 </beans>
